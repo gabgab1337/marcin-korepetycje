@@ -36,7 +36,6 @@
 </body>
 </html>
 
-
 <?php
     
   // if (isset($_COOKIE["username"])) {
