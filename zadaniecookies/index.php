@@ -1,25 +1,26 @@
 <?php
 session_start();
 $action = "index.php";
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $username = $_POST['username'];
-    $_SESSION['username'] = $username;
-    $zapamietaj = (isset($_POST['remember']));
-    if ($zapamietaj) {
-        setcookie("remember_user", $username, time() + (3600 * 24 * 7), "/");
-    } else {
-        setcookie("remember_user", $username, time() - (3600), "/");
-    }
-    
-    $action = "panel.php";
-    header('Location:' . $action);
-    exit();
-} elseif (isset($_COOKIE["remember_user"]) || !empty($_SESSION['username'])) {
+if (isset($_SESSION['username'])) {
     $action = "panel.php";
     header('Location:' . $action);
     exit();
 }
 
+if ($action == "index.php") {
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $username = $_POST['username'];
+    $_SESSION['username'] = $username;
+    
+    $action = "panel.php";
+    header('Location:' . $action);
+    exit();
+} elseif (!empty($_SESSION['username'])) {
+    $action = "panel.php";
+    header('Location:' . $action);
+    exit();
+}
+}
 ?>
 
 <!doctype html>

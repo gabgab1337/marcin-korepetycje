@@ -1,3 +1,11 @@
+<?php
+$action = "index.php";
+if (isset($_SESSION['username'])) {
+    $action = "panel.php";
+    header('Location:' . $action);
+    exit();
+}
+?>
 <!doctype html>
 <html lang="en">
 

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            text-align: center;
+        }
+        #zdjecie {
+            width: 300px;
+            height: 300px;
+            border: 2px solid black;
+            cursor: pointer;
+            
+        }
+
+        #galeria {
+            margin-top: 20px;
+        }
+
+        .male_zdjecie {
+            width: 100px;
+            height: 100px;
+            border: 1px solid gray;
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1 id="licznik">Liczba zdjęć: 0</h1>
+    <img src="house.png" id="zdjecie" alt="doktor house"> <br>
+    <button id="przycisk" onclick="reset()">Wyczysc galerie zdjec</button>
+
+    <div id="galeria"></div>
+    
+    <script>
+        const zdjecie1 = "house.png"; // oryginalne zdjecie
+        const zdjecie2 = "cartoon.png"; // zdjecie po najechaniu
+        const obrazek = document.getElementById("zdjecie");
+        const galeria = document.getElementById("galeria");
+
+        let licznik = 0;
+        const licznikElement = document.getElementById("licznik");
+
+        let wysokosc = 300;
+        let szerokosc = 300;
+        
+        // 1. Najechanie (zmiana zdjęcia)
+        obrazek.addEventListener("mouseover", function() {
+            obrazek.src = zdjecie2;
+        });
+
+        // function podmiana() {
+        //     obrazek.src = zdjecie2;
+        // }
+
+        // obrazek.addEventListener("mouseover", podmiana());
+
+        // function podmiana(element) {
+        //     element.src = zdjecie2;
+        // }
+
+        // obrazek.addEventListener("mouseover", podmiana(obrazek));
+        // 2. Odjechanie (przywrócenie oryginalnego zdjęcia)
+        obrazek.addEventListener("mouseout", function() {
+            obrazek.src = zdjecie1;
+        });
+        // 3. Kliknięcie (dodanie do galerii)
+        obrazek.addEventListener("click",function() {
+            let elementImg = document.createElement("img");
+            elementImg.src = zdjecie2;
+            elementImg.classList.add("male_zdjecie");
+            elementImg.style.width = szerokosc + "px";
+            elementImg.style.height = wysokosc + "px";
+            galeria.appendChild(elementImg);
+            szerokosc = szerokosc / 1.2;
+            wysokosc = wysokosc / 1.2;
+            licznik++;
+            licznikElement.innerHTML = "Liczba zdjęć: " + licznik;
+        });
+
+        function reset() {
+            licznik = 0;
+            licznikElement.innerHTML = "Liczba zdjęć: " + licznik;
+            galeria.innerHTML = "";
+            wysokosc = 300;
+            szerokosc = 300;
+        }
+    </script>
+</body>
+</html>
