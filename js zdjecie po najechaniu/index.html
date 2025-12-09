@@ -16,6 +16,14 @@
             
         }
 
+        #zdjecie2 {
+            width: 300px;
+            height: 300px;
+            border: 2px solid black;
+            cursor: pointer;
+            
+        }
+
         #galeria {
             margin-top: 20px;
         }
@@ -30,7 +38,8 @@
 </head>
 <body>
     <h1 id="licznik">Liczba zdjęć: 0</h1>
-    <img src="house.png" id="zdjecie" alt="doktor house"> <br>
+    <img src="house.png" id="zdjecie" alt="doktor house">
+    <img src="cartoon.png" id="zdjecie2" alt="doktor house"> <br>
     <button id="przycisk" onclick="reset()">Wyczysc galerie zdjec</button>
 
     <div id="galeria"></div>
@@ -39,6 +48,7 @@
         const zdjecie1 = "house.png"; // oryginalne zdjecie
         const zdjecie2 = "cartoon.png"; // zdjecie po najechaniu
         const obrazek = document.getElementById("zdjecie");
+        const obrazek2 = document.getElementById("zdjecie2");
         const galeria = document.getElementById("galeria");
 
         let licznik = 0;
@@ -50,6 +60,9 @@
         // 1. Najechanie (zmiana zdjęcia)
         obrazek.addEventListener("mouseover", function() {
             obrazek.src = zdjecie2;
+        });
+        obrazek2.addEventListener("mouseover", function() {
+            obrazek2.src = zdjecie1;
         });
 
         // function podmiana() {
@@ -67,11 +80,30 @@
         obrazek.addEventListener("mouseout", function() {
             obrazek.src = zdjecie1;
         });
+        obrazek2.addEventListener("mouseout", function() {
+            obrazek2.src = zdjecie2;
+        });
         // 3. Kliknięcie (dodanie do galerii)
+
+        let ktoreZdjecie = zdjecie2;
+
         obrazek.addEventListener("click",function() {
-            let elementImg = document.createElement("img");
-            elementImg.src = zdjecie2;
-            elementImg.classList.add("male_zdjecie");
+            let elementImg = document.createElement("img"); // <img>
+            elementImg.src = zdjecie2; // <img src="cartoon.png">
+            elementImg.classList.add("male_zdjecie"); // <img class="male_zdjecie" src="cartoon.png">
+            elementImg.style.width = szerokosc + "px";
+            elementImg.style.height = wysokosc + "px";
+            galeria.appendChild(elementImg);
+            szerokosc = szerokosc / 1.2;
+            wysokosc = wysokosc / 1.2;
+            licznik++;
+            licznikElement.innerHTML = "Liczba zdjęć: " + licznik;
+        });
+
+        obrazek2.addEventListener("click",function() {
+            let elementImg = document.createElement("img"); // <img>
+            elementImg.src = zdjecie1; // <img srWc="cartoon.png">
+            elementImg.classList.add("male_zdjecie"); // <img class="male_zdjecie" src="cartoon.png">
             elementImg.style.width = szerokosc + "px";
             elementImg.style.height = wysokosc + "px";
             galeria.appendChild(elementImg);

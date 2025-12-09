@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        text-align: center;
+      }
+      #zdjecie1 {
+        width: 300px;
+        height: 300px;
+        border: 2px solid black;
+        cursor: pointer;
+      }
+
+      #zdjecie2 {
+        width: 300px;
+        height: 300px;
+        border: 2px solid black;
+        cursor: pointer;
+      }
+
+      #galeria {
+        margin-top: 20px;
+      }
+
+      .male_zdjecie {
+        width: 100px;
+        height: 100px;
+        border: 1px solid gray;
+        margin: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <img src="cartoon.png" id="zdjecie1" />
+    <img src="house.png" id="zdjecie2" /> <br />
+    <input
+      type="number"
+      id="ktoreZdjecie"
+      name="ktoreZdjecie"
+      min="1"
+      max="2"
+      required
+    />
+    <br />
+    <br />
+    <input type="number" id="ileZdjec" name="ileZdjec" min="1" required />
+    <br />
+    <br />
+    <button type="submit" onclick="wykonaj()">stworz</button> <br />
+    <div id="galeria"></div>
+    <script>
+        let ktoryObrazekDodany;
+
+      function wykonaj() {
+        let ktoreZdjecie = document.getElementById("ktoreZdjecie").value;
+        let ileZdjec = document.getElementById("ileZdjec").value;
+        let galeria = document.getElementById("galeria");
+
+
+        for (let i = 0; i < ileZdjec; i++) {
+          let spawn = document.createElement("img");
+          spawn.classList.add("male_zdjecie");
+          if (ktoreZdjecie == 1) {
+            spawn.src = "cartoon.png";
+            ktoryObrazekDodany = "cartoon.png";
+          } else {
+            spawn.src = "house.png";
+            ktoryObrazekDodany = "house.png";
+          }
+          galeria.appendChild(spawn);
+
+          if (ktoryObrazekDodany == "cartoon.png") {
+            spawn.addEventListener("mouseover", function () {
+            spawn.src = "house.png";
+            });
+            spawn.addEventListener("mouseout", function () {
+                spawn.src = "cartoon.png";
+            });
+          }
+          else {
+            spawn.addEventListener("mouseover", function () {
+            spawn.src = "cartoon.png";
+            });
+            spawn.addEventListener("mouseout", function () {
+                spawn.src = "house.png";
+            });
+          }
+          console.log("dodano");
+        }
+      }
+    </script>
+  </body>
+</html>
